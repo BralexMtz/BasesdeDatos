@@ -1,0 +1,37 @@
+BRAYAN0507-SQL> start empleado_ext2.sql
+Conectando como sys
+Connected.
+creando directorio tmp_dir
+
+Directory created.
+
+
+Grant succeeded.
+
+Contectando con usuario brayan0507 para crear la tabla externa
+Connected.
+USER is "BRAYAN0507"
+creando tabla externa
+
+Table created.
+
+creando el directorio /tmp/bases en caso de no existir
+
+copiando el archivo csv a /tmp/bases
+
+cambiando permisos
+
+mostrando los datos
+
+NUM_EMPLEADO NOMBRE               AP_PATERNO           AP_MATERNO           FECHA_NACIMIENTO   EMAIL                SUELDO_MENSUAL   COMISION
+------------ -------------------- -------------------- -------------------- ------------------ -------------------- -------------- ----------
+         100 juan                 lopez                martinez             10-OCT-87
+         101 mario                jimenez              perez                23-AUG-99
+         102 jose                 lopez                luna                 10-NOV-87          joe@ejemplos.com               2000        200
+         103 maria                ortiz                hernandez            13-AUG-99                                         2500        100
+         104 jorge                molina               vazquez              11-OCT-87          jorg@ejemplos.com                          200
+         105 mariana              villa                soto                 21-AUG-99          miana@ejemplos.com            30000
+
+6 rows selected.
+
+BRAYAN0507-SQL> spool off

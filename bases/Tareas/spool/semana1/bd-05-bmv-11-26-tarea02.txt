@@ -1,0 +1,38 @@
+BRAYAN0507-SQL> create global temporary table empleado_temp(
+  2  empleado_id number(10,0) not null,
+  3  nombre varchar2(40) not null) on commit preserve rows;
+create global temporary table empleado_temp(
+                              *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+BRAYAN0507-SQL> create global temporary table empleado_temp2(
+  2  empleado_id number(10,0) not null,
+  3  nombre varchar2(40) not null) on commit preserve rows;
+
+Table created.
+
+BRAYAN0507-SQL> insert into empleado_temp2 values(1,'bralex');
+
+1 row created.
+
+BRAYAN0507-SQL> select * from empleado_temp2;
+
+EMPLEADO_ID NOMBRE
+----------- ----------------------------------------
+          1 bralex
+
+BRAYAN0507-SQL> commit;
+
+Commit complete.
+
+BRAYAN0507-SQL> select * from empleado_temp2;
+
+EMPLEADO_ID NOMBRE
+----------- ----------------------------------------
+          1 bralex
+
+BRAYAN0507-SQL> -- Los datos continuan a pesar del commit, lo cual indica que
+BRAYAN0507-SQL> -- la sentencia ON COMMIT PRESERVE ROWS hizo que no se borraran
+BRAYAN0507-SQL> spool off

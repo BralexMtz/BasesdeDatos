@@ -1,0 +1,40 @@
+ER/Studio Generate Database Facility Messages
+ 
+Script: \\VBOXSVR\Desktop\bd\Bases de 
+   datos\Laboratorio\Practica10\VISTA-ORACLE.sql
+ 
+Date/Time: 01/13/21 11:45:22
+--------------------------------------------------------
+
+Generating Dependencies ...
+   Dependency Sql
+
+Generating Tables ...
+
+Generating Views ...
+
+Generating Indexes ...
+   CLAVE_ARTICULO_UINDEX
+
+Generating Foreign Keys ...
+   ARTICULO
+   ARTICULO_ARQUEOLOGICO
+   ARTICULO_DONADO
+   ARTICULO_FAMOSO
+   CLIENTE
+   ENTIDAD
+   FACTURA_CLIENTE
+   HISTORICO_STATUS_ARTICULO
+   PAIS
+   STATUS_ARTICULO
+   SUBASTA
+   SUBASTA_VENTA
+   TARJETA_CLIENTE
+
+Generating Model Post SQL ...
+   Model Post Sql
+Ending time: 01/13/21 11:45:22
+ 
+ 
+Code Generation Complete
+ 

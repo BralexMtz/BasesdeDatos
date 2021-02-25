@@ -1,0 +1,925 @@
+BRAYAN05072-SQL> -- C
+BRAYAN05072-SQL> -- Cambiar nombre de editorial_id a editorial_libro_id
+BRAYAN05072-SQL> alter table editorial rename column editorial_id to editorial_libro_id;
+
+Table altered.
+
+BRAYAN05072-SQL> -- Que ocurre con las tablas que hacen referencia?
+BRAYAN05072-SQL> desc libro;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ LIBRO_ID                                  NOT NULL NUMBER(10)
+ PRECIO                                    NOT NULL NUMBER(6,2)
+ NOMBRE                                    NOT NULL VARCHAR2(100)
+ FECHA_ESTATUS                             NOT NULL DATE
+ EDITORIAL_ID                              NOT NULL NUMBER(5)
+ TEMATICA_ID                                        NUMBER(3)
+ ESTATUS_LIBRO_ID                          NOT NULL NUMBER(2)
+ CLAVE                                     NOT NULL VARCHAR2(10)
+
+BRAYAN05072-SQL> select count(*) libro;
+select count(*) libro
+                    *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+BRAYAN05072-SQL> select count(*) from libro;
+
+  COUNT(*)
+----------
+         0
+
+BRAYAN05072-SQL> desc user_constraints;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ OWNER                                              VARCHAR2(128)
+ CONSTRAINT_NAME                                    VARCHAR2(128)
+ CONSTRAINT_TYPE                                    VARCHAR2(1)
+ TABLE_NAME                                         VARCHAR2(128)
+ SEARCH_CONDITION                                   LONG
+ SEARCH_CONDITION_VC                                VARCHAR2(4000)
+ R_OWNER                                            VARCHAR2(128)
+ R_CONSTRAINT_NAME                                  VARCHAR2(128)
+ DELETE_RULE                                        VARCHAR2(9)
+ STATUS                                             VARCHAR2(8)
+ DEFERRABLE                                         VARCHAR2(14)
+ DEFERRED                                           VARCHAR2(9)
+ VALIDATED                                          VARCHAR2(13)
+ GENERATED                                          VARCHAR2(14)
+ BAD                                                VARCHAR2(3)
+ RELY                                               VARCHAR2(4)
+ LAST_CHANGE                                        DATE
+ INDEX_OWNER                                        VARCHAR2(128)
+ INDEX_NAME                                         VARCHAR2(128)
+ INVALID                                            VARCHAR2(7)
+ VIEW_RELATED                                       VARCHAR2(14)
+ ORIGIN_CON_ID                                      NUMBER
+
+BRAYAN05072-SQL> select constraint_name,status,invalid from user_constraints where table_name='LIBRO';
+
+CONSTRAINT_NAME
+--------------------------------------------------------------------------------
+STATUS   INVALID
+-------- -------
+LIBRO_TEMATICA_FK
+ENABLED
+
+LIBRO_STATUS_FK
+ENABLED
+
+LIBRO_EDITORIAL_FK
+ENABLED
+
+
+CONSTRAINT_NAME
+--------------------------------------------------------------------------------
+STATUS   INVALID
+-------- -------
+SYS_C007533
+ENABLED
+
+SYS_C007534
+ENABLED
+
+SYS_C007535
+ENABLED
+
+
+CONSTRAINT_NAME
+--------------------------------------------------------------------------------
+STATUS   INVALID
+-------- -------
+SYS_C007536
+ENABLED
+
+SYS_C007537
+ENABLED
+
+SYS_C007539
+ENABLED
+
+
+CONSTRAINT_NAME
+--------------------------------------------------------------------------------
+STATUS   INVALID
+-------- -------
+SYS_C007549
+ENABLED
+
+LIBRO_PRECIO_CHK
+ENABLED
+
+LIBRO_PK
+ENABLED
+
+
+CONSTRAINT_NAME
+--------------------------------------------------------------------------------
+STATUS   INVALID
+-------- -------
+LIBRO_CLAVE_UK
+ENABLED
+
+
+13 rows selected.
+
+BRAYAN05072-SQL> select constraint_name,status,validated from user_constraints where table_name='LIBRO';
+
+CONSTRAINT_NAME
+--------------------------------------------------------------------------------
+STATUS   VALIDATED
+-------- -------------
+LIBRO_TEMATICA_FK
+ENABLED  VALIDATED
+
+LIBRO_STATUS_FK
+ENABLED  VALIDATED
+
+LIBRO_EDITORIAL_FK
+ENABLED  VALIDATED
+
+
+CONSTRAINT_NAME
+--------------------------------------------------------------------------------
+STATUS   VALIDATED
+-------- -------------
+SYS_C007533
+ENABLED  VALIDATED
+
+SYS_C007534
+ENABLED  VALIDATED
+
+SYS_C007535
+ENABLED  VALIDATED
+
+
+CONSTRAINT_NAME
+--------------------------------------------------------------------------------
+STATUS   VALIDATED
+-------- -------------
+SYS_C007536
+ENABLED  VALIDATED
+
+SYS_C007537
+ENABLED  VALIDATED
+
+SYS_C007539
+ENABLED  VALIDATED
+
+
+CONSTRAINT_NAME
+--------------------------------------------------------------------------------
+STATUS   VALIDATED
+-------- -------------
+SYS_C007549
+ENABLED  VALIDATED
+
+LIBRO_PRECIO_CHK
+ENABLED  VALIDATED
+
+LIBRO_PK
+ENABLED  VALIDATED
+
+
+CONSTRAINT_NAME
+--------------------------------------------------------------------------------
+STATUS   VALIDATED
+-------- -------------
+LIBRO_CLAVE_UK
+ENABLED  VALIDATED
+
+
+13 rows selected.
+
+BRAYAN05072-SQL> select constraint_name,search_condition,constraint_type from user_constraints where table_name='LIBRO';
+
+CONSTRAINT_NAME
+--------------------------------------------------------------------------------
+SEARCH_CONDITION
+--------------------------------------------------------------------------------
+C
+-
+LIBRO_TEMATICA_FK
+
+R
+
+LIBRO_STATUS_FK
+
+R
+
+CONSTRAINT_NAME
+--------------------------------------------------------------------------------
+SEARCH_CONDITION
+--------------------------------------------------------------------------------
+C
+-
+
+LIBRO_EDITORIAL_FK
+
+R
+
+SYS_C007533
+"LIBRO_ID" IS NOT NULL
+
+CONSTRAINT_NAME
+--------------------------------------------------------------------------------
+SEARCH_CONDITION
+--------------------------------------------------------------------------------
+C
+-
+C
+
+SYS_C007534
+"PRECIO" IS NOT NULL
+C
+
+SYS_C007535
+
+CONSTRAINT_NAME
+--------------------------------------------------------------------------------
+SEARCH_CONDITION
+--------------------------------------------------------------------------------
+C
+-
+"NOMBRE" IS NOT NULL
+C
+
+SYS_C007536
+"FECHA_ESTATUS" IS NOT NULL
+C
+
+
+CONSTRAINT_NAME
+--------------------------------------------------------------------------------
+SEARCH_CONDITION
+--------------------------------------------------------------------------------
+C
+-
+SYS_C007537
+"EDITORIAL_ID" IS NOT NULL
+C
+
+SYS_C007539
+"ESTATUS_LIBRO_ID" IS NOT NULL
+C
+
+CONSTRAINT_NAME
+--------------------------------------------------------------------------------
+SEARCH_CONDITION
+--------------------------------------------------------------------------------
+C
+-
+
+SYS_C007549
+"CLAVE" IS NOT NULL
+C
+
+LIBRO_PRECIO_CHK
+ precio between 20 and 5000
+
+CONSTRAINT_NAME
+--------------------------------------------------------------------------------
+SEARCH_CONDITION
+--------------------------------------------------------------------------------
+C
+-
+C
+
+LIBRO_PK
+
+P
+
+LIBRO_CLAVE_UK
+
+CONSTRAINT_NAME
+--------------------------------------------------------------------------------
+SEARCH_CONDITION
+--------------------------------------------------------------------------------
+C
+-
+
+U
+
+
+13 rows selected.
+
+BRAYAN05072-SQL> set linesize window
+BRAYAN05072-SQL> select constraint_name,search_condition,constraint_type from user_constraints where table_name='LIBRO';
+
+CONSTRAINT_NAME
+--------------------------------------------------------------------------------------------------------------------------------
+SEARCH_CONDITION                                                                 C
+-------------------------------------------------------------------------------- -
+LIBRO_TEMATICA_FK
+                                                                                 R
+
+LIBRO_STATUS_FK
+                                                                                 R
+
+LIBRO_EDITORIAL_FK
+                                                                                 R
+
+SYS_C007533
+"LIBRO_ID" IS NOT NULL                                                           C
+
+SYS_C007534
+"PRECIO" IS NOT NULL                                                             C
+
+SYS_C007535
+"NOMBRE" IS NOT NULL                                                             C
+
+SYS_C007536
+"FECHA_ESTATUS" IS NOT NULL                                                      C
+
+SYS_C007537
+"EDITORIAL_ID" IS NOT NULL                                                       C
+
+SYS_C007539
+"ESTATUS_LIBRO_ID" IS NOT NULL                                                   C
+
+SYS_C007549
+"CLAVE" IS NOT NULL                                                              C
+
+LIBRO_PRECIO_CHK
+ precio between 20 and 5000                                                      C
+
+LIBRO_PK
+                                                                                 P
+
+
+CONSTRAINT_NAME
+--------------------------------------------------------------------------------------------------------------------------------
+SEARCH_CONDITION                                                                 C
+-------------------------------------------------------------------------------- -
+LIBRO_CLAVE_UK
+                                                                                 U
+
+
+13 rows selected.
+
+BRAYAN05072-SQL> select constraint_name from user_constraints where table_name='LIBRO' and constraint_type='R';
+
+CONSTRAINT_NAME
+--------------------------------------------------------------------------------------------------------------------------------
+LIBRO_TEMATICA_FK
+LIBRO_STATUS_FK
+LIBRO_EDITORIAL_FK
+
+BRAYAN05072-SQL> desc user_constraints;
+ Name                                                                                              Null?    Type
+ ------------------------------------------------------------------------------------------------- -------- -----------------------------------------------------------------
+ OWNER                                                                                                      VARCHAR2(128)
+ CONSTRAINT_NAME                                                                                            VARCHAR2(128)
+ CONSTRAINT_TYPE                                                                                            VARCHAR2(1)
+ TABLE_NAME                                                                                                 VARCHAR2(128)
+ SEARCH_CONDITION                                                                                           LONG
+ SEARCH_CONDITION_VC                                                                                        VARCHAR2(4000)
+ R_OWNER                                                                                                    VARCHAR2(128)
+ R_CONSTRAINT_NAME                                                                                          VARCHAR2(128)
+ DELETE_RULE                                                                                                VARCHAR2(9)
+ STATUS                                                                                                     VARCHAR2(8)
+ DEFERRABLE                                                                                                 VARCHAR2(14)
+ DEFERRED                                                                                                   VARCHAR2(9)
+ VALIDATED                                                                                                  VARCHAR2(13)
+ GENERATED                                                                                                  VARCHAR2(14)
+ BAD                                                                                                        VARCHAR2(3)
+ RELY                                                                                                       VARCHAR2(4)
+ LAST_CHANGE                                                                                                DATE
+ INDEX_OWNER                                                                                                VARCHAR2(128)
+ INDEX_NAME                                                                                                 VARCHAR2(128)
+ INVALID                                                                                                    VARCHAR2(7)
+ VIEW_RELATED                                                                                               VARCHAR2(14)
+ ORIGIN_CON_ID                                                                                              NUMBER
+
+BRAYAN05072-SQL> desc editorial;
+ Name                                                                                              Null?    Type
+ ------------------------------------------------------------------------------------------------- -------- -----------------------------------------------------------------
+ EDITORIAL_LIBRO_ID                                                                                NOT NULL NUMBER(5)
+ CLAVE                                                                                             NOT NULL VARCHAR2(50)
+ ACTIVO                                                                                            NOT NULL NUMBER(1)
+
+BRAYAN05072-SQL> insert into editorial values(1,"PORRUA",1);
+insert into editorial values(1,"PORRUA",1)
+                               *
+ERROR at line 1:
+ORA-00984: column not allowed here
+
+
+BRAYAN05072-SQL> insert into editorial(1,"PORRUA",1);
+insert into editorial(1,"PORRUA",1)
+                      *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword
+
+
+BRAYAN05072-SQL> insert into editorial(editorial_libro_id,clave,activo) values(1,"PORRUA",1);
+insert into editorial(editorial_libro_id,clave,activo) values(1,"PORRUA",1)
+                                                                *
+ERROR at line 1:
+ORA-00984: column not allowed here
+
+
+BRAYAN05072-SQL> insert into editorial(editorial_libro_id,clave,activo) values(1,'PORRUA',1);
+
+1 row created.
+
+BRAYAN05072-SQL> desc libro
+ Name                                                                                              Null?    Type
+ ------------------------------------------------------------------------------------------------- -------- -----------------------------------------------------------------
+ LIBRO_ID                                                                                          NOT NULL NUMBER(10)
+ PRECIO                                                                                            NOT NULL NUMBER(6,2)
+ NOMBRE                                                                                            NOT NULL VARCHAR2(100)
+ FECHA_ESTATUS                                                                                     NOT NULL DATE
+ EDITORIAL_ID                                                                                      NOT NULL NUMBER(5)
+ TEMATICA_ID                                                                                                NUMBER(3)
+ ESTATUS_LIBRO_ID                                                                                  NOT NULL NUMBER(2)
+ CLAVE                                                                                             NOT NULL VARCHAR2(10)
+
+BRAYAN05072-SQL> insert into libro values(1,123,'Odisea',to_date('11/11/2001 dd/mm/yyyy'),1,null,1,'CLS');
+insert into libro values(1,123,'Odisea',to_date('11/11/2001 dd/mm/yyyy'),1,null,1,'CLS')
+                                                *
+ERROR at line 1:
+ORA-01843: not a valid month
+
+
+BRAYAN05072-SQL> insert into libro values(1,123,'Odisea',to_date('11/11/2001','dd/mm/yyyy'),1,null,1,'CLS');
+insert into libro values(1,123,'Odisea',to_date('11/11/2001','dd/mm/yyyy'),1,null,1,'CLS')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (BRAYAN05072.LIBRO_STATUS_FK) violated - parent key not found
+
+
+BRAYAN05072-SQL> desc estatus_libro;
+ Name                                                                                              Null?    Type
+ ------------------------------------------------------------------------------------------------- -------- -----------------------------------------------------------------
+ ESTATUS_LIBRO_ID                                                                                  NOT NULL NUMBER(2)
+ CLAVE                                                                                             NOT NULL VARCHAR2(20)
+ DESCRIPCION                                                                                                VARCHAR2(255)
+ ACTIVO                                                                                            NOT NULL NUMBER(1)
+
+BRAYAN05072-SQL> insert into estatus_libro values(1,'activo','',1);
+
+1 row created.
+
+BRAYAN05072-SQL> insert into libro values(1,123,'Odisea',to_date('11/11/2001','dd/mm/yyyy'),1,null,1,'CLS');
+
+1 row created.
+
+BRAYAN05072-SQL> insert into libro values(2,123,'Odisea',to_date('11/11/2001','dd/mm/yyyy'),2,null,1,'CLS');
+insert into libro values(2,123,'Odisea',to_date('11/11/2001','dd/mm/yyyy'),2,null,1,'CLS')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (BRAYAN05072.LIBRO_CLAVE_UK) violated
+
+
+BRAYAN05072-SQL> select * from libro;
+
+  LIBRO_ID     PRECIO NOMBRE                                                                                               FECHA_ESTATUS      EDITORIAL_ID TEMATICA_ID
+---------- ---------- ---------------------------------------------------------------------------------------------------- ------------------ ------------ -----------
+ESTATUS_LIBRO_ID CLAVE
+---------------- ----------
+         1        123 Odisea                                                                                               11-NOV-01                     1
+               1 CLS
+
+
+BRAYAN05072-SQL> select * from editorial;
+
+EDITORIAL_LIBRO_ID CLAVE                                                  ACTIVO
+------------------ -------------------------------------------------- ----------
+                 1 PORRUA                                                      1
+
+BRAYAN05072-SQL> -- AL PARECER NO LE PASA NADA A LA REFERENCIA, PERMANECE EL CONSTRAINT A PESAR DE CAMBIAR EL NOMBRE
+BRAYAN05072-SQL> delete editorial;
+delete editorial
+*
+ERROR at line 1:
+ORA-02292: integrity constraint (BRAYAN05072.LIBRO_EDITORIAL_FK) violated - child record found
+
+
+BRAYAN05072-SQL> delete estatus_libro;
+delete estatus_libro
+*
+ERROR at line 1:
+ORA-02292: integrity constraint (BRAYAN05072.LIBRO_STATUS_FK) violated - child record found
+
+
+BRAYAN05072-SQL> delete libro;
+
+1 row deleted.
+
+BRAYAN05072-SQL> delete estatus_libro;
+
+1 row deleted.
+
+BRAYAN05072-SQL> delete editorial;
+
+1 row deleted.
+
+BRAYAN05072-SQL> -- D. migracion de datos a tabla libro.
+BRAYAN05072-SQL> -- Deshabilitar todos los constraints y volver a habilitar
+BRAYAN05072-SQL> select constraint_name from user_constraints where table_name='LIBRO';
+
+CONSTRAINT_NAME
+--------------------------------------------------------------------------------------------------------------------------------
+LIBRO_TEMATICA_FK
+LIBRO_STATUS_FK
+LIBRO_EDITORIAL_FK
+SYS_C007533
+SYS_C007534
+SYS_C007535
+SYS_C007536
+SYS_C007537
+SYS_C007539
+SYS_C007549
+LIBRO_PRECIO_CHK
+LIBRO_PK
+LIBRO_CLAVE_UK
+
+13 rows selected.
+
+BRAYAN05072-SQL> alter table libro disable constraint LIBRO_TEMATICA_FK;
+
+Table altered.
+
+BRAYAN05072-SQL> alter table libro disable constraint LIBRO_STATUS_FK;
+
+Table altered.
+
+BRAYAN05072-SQL> alter table libro disable constraint LIBRO_EDITORIAL_FK;
+
+Table altered.
+
+BRAYAN05072-SQL> alter table libro disable constraint SYS_C007533;
+
+Table altered.
+
+BRAYAN05072-SQL> alter table libro disable constraint SYS_C007534;
+
+Table altered.
+
+BRAYAN05072-SQL> alter table libro disable constraint SYS_C007535;
+
+Table altered.
+
+BRAYAN05072-SQL> alter table libro disable constraint SYS_C007536;
+
+Table altered.
+
+BRAYAN05072-SQL> alter table libro disable constraint SYS_C007537;
+
+Table altered.
+
+BRAYAN05072-SQL> alter table libro disable constraint SYS_C007539;
+
+Table altered.
+
+BRAYAN05072-SQL> alter table libro disable constraint SYS_C007549;
+
+Table altered.
+
+BRAYAN05072-SQL> alter table libro disable constraint LIBRO_PRECIO_CHK;
+
+Table altered.
+
+BRAYAN05072-SQL> alter table libro disable constraint LIBRO_PRECIO_PK;
+alter table libro disable constraint LIBRO_PRECIO_PK
+*
+ERROR at line 1:
+ORA-02431: cannot disable constraint (LIBRO_PRECIO_PK) - no such constraint
+
+
+BRAYAN05072-SQL> alter table libro disable constraint LIBRO_PK;
+alter table libro disable constraint LIBRO_PK
+*
+ERROR at line 1:
+ORA-02297: cannot disable constraint (BRAYAN05072.LIBRO_PK) - dependencies exist
+
+
+BRAYAN05072-SQL> alter table libro disable constraint LIBRO_CLAVE_UK;
+
+Table altered.
+
+BRAYAN05072-SQL> alter table historico_estatus_libro disable constraint historico_status_libro_id_fk;
+alter table historico_estatus_libro disable constraint historico_status_libro_id_fk
+*
+ERROR at line 1:
+ORA-02431: cannot disable constraint (HISTORICO_STATUS_LIBRO_ID_FK) - no such
+constraint
+
+
+BRAYAN05072-SQL> select constraint_name from user_constraints where table_name='HISTORICO_ESTATUS_LIBRO';
+
+CONSTRAINT_NAME
+--------------------------------------------------------------------------------------
+H_STATUS_LIBRO_STATUS_FK
+HISTORICO_ESTATUS_LIBRO_ID_FK
+SYS_C007525
+SYS_C007526
+SYS_C007527
+SYS_C007547
+H_ESTATUS_LIBRO_PK
+
+7 rows selected.
+
+BRAYAN05072-SQL> alter table historico_estatus_libro disable constraint historico_estatus_libro_id_fk;
+
+Table altered.
+
+BRAYAN05072-SQL> select constraint_name,status from user_constraints where table_name='LIBRO';
+
+CONSTRAINT_NAME
+--------------------------------------------------------------------------------------
+STATUS
+--------
+LIBRO_PK
+ENABLED
+
+LIBRO_TEMATICA_FK
+DISABLED
+
+LIBRO_STATUS_FK
+DISABLED
+
+LIBRO_EDITORIAL_FK
+DISABLED
+
+SYS_C007533
+DISABLED
+
+SYS_C007534
+DISABLED
+
+SYS_C007535
+DISABLED
+
+SYS_C007536
+DISABLED
+
+SYS_C007537
+DISABLED
+
+SYS_C007539
+DISABLED
+
+SYS_C007549
+DISABLED
+
+LIBRO_CLAVE_UK
+DISABLED
+
+
+CONSTRAINT_NAME
+--------------------------------------------------------------------------------------
+STATUS
+--------
+LIBRO_PRECIO_CHK
+DISABLED
+
+
+13 rows selected.
+
+BRAYAN05072-SQL> alter table libro disable constraint LIBRO_PK;
+
+Table altered.
+
+BRAYAN05072-SQL> select constraint_name,status from user_constraints where table_name='LIBRO';
+
+CONSTRAINT_NAME
+--------------------------------------------------------------------------------------
+STATUS
+--------
+LIBRO_TEMATICA_FK
+DISABLED
+
+LIBRO_STATUS_FK
+DISABLED
+
+LIBRO_EDITORIAL_FK
+DISABLED
+
+SYS_C007533
+DISABLED
+
+SYS_C007534
+DISABLED
+
+SYS_C007535
+DISABLED
+
+SYS_C007536
+DISABLED
+
+SYS_C007537
+DISABLED
+
+SYS_C007539
+DISABLED
+
+LIBRO_PK
+DISABLED
+
+SYS_C007549
+DISABLED
+
+LIBRO_CLAVE_UK
+DISABLED
+
+
+CONSTRAINT_NAME
+--------------------------------------------------------------------------------------
+STATUS
+--------
+LIBRO_PRECIO_CHK
+DISABLED
+
+
+13 rows selected.
+
+BRAYAN05072-SQL> -- AHORA QUE YA HEMOS DESHABILITADO TODOS LOS CONSTRAINTS, YA PODEMOS HACER LA MIGRACION
+BRAYAN05072-SQL> -- DESPUES DE HACER LA MIGRACION PODEMOS VOLVER A HABILITARLOS
+BRAYAN05072-SQL> alter table historico_estatus_libro enable constraint historico_estatus_libro_id_fk;
+alter table historico_estatus_libro enable constraint historico_estatus_libro_id_fk
+*
+ERROR at line 1:
+ORA-02270: no matching unique or primary key for this column-list
+
+
+BRAYAN05072-SQL> alter table libro enable constraint LIBRO_PK;
+
+Table altered.
+
+BRAYAN05072-SQL> alter table historico_estatus_libro enable constraint historico_estatus_libro_id_fk;
+
+Table altered.
+
+BRAYAN05072-SQL> select constraint_name from user_constraints where table_name='LIBRO';
+
+CONSTRAINT_NAME
+--------------------------------------------------------------------------------------
+LIBRO_PK
+LIBRO_TEMATICA_FK
+LIBRO_STATUS_FK
+LIBRO_EDITORIAL_FK
+SYS_C007533
+SYS_C007534
+SYS_C007535
+SYS_C007536
+SYS_C007537
+SYS_C007539
+SYS_C007549
+LIBRO_CLAVE_UK
+LIBRO_PRECIO_CHK
+
+13 rows selected.
+
+BRAYAN05072-SQL> alter table libro enable constraint LIBRO_TEMATICA_FK;
+
+Table altered.
+
+BRAYAN05072-SQL> alter table libro enable constraint LIBRO_STATUS_FK;
+
+Table altered.
+
+BRAYAN05072-SQL> alter table libro enable constraint LIBRO_EDITORIAL_FK;
+
+Table altered.
+
+BRAYAN05072-SQL> alter table libro enable constraint SYS_C007533;
+
+Table altered.
+
+BRAYAN05072-SQL> alter table libro enable constraint SYS_C007534;
+
+Table altered.
+
+BRAYAN05072-SQL> alter table libro enable constraint SYS_C007535;
+
+Table altered.
+
+BRAYAN05072-SQL> alter table libro enable constraint SYS_C007536;
+
+Table altered.
+
+BRAYAN05072-SQL> alter table libro enable constraint SYS_C007537;
+
+Table altered.
+
+BRAYAN05072-SQL> alter table libro enable constraint SYS_C007539;
+
+Table altered.
+
+BRAYAN05072-SQL> alter table libro enable constraint SYS_C007549;
+
+Table altered.
+
+BRAYAN05072-SQL> alter table libro enable constraint LIBRO_CLAVE_UK;
+
+Table altered.
+
+BRAYAN05072-SQL> alter table libro enable constraint LIBRO_PRECIO_CHK;
+
+Table altered.
+
+BRAYAN05072-SQL> select status from user_constraints where table_name='LIBRO';
+
+STATUS
+--------
+ENABLED
+ENABLED
+ENABLED
+ENABLED
+ENABLED
+ENABLED
+ENABLED
+ENABLED
+ENABLED
+ENABLED
+ENABLED
+ENABLED
+ENABLED
+
+13 rows selected.
+
+BRAYAN05072-SQL> select INDEX_NAME, TABLE_OWNER, TABLE_NAME, UNIQUENESS from USER_INDEXES
+  2  ;
+
+INDEX_NAME
+--------------------------------------------------------------------------------------
+TABLE_OWNER
+--------------------------------------------------------------------------------------
+TABLE_NAME
+--------------------------------------------------------------------------------------
+UNIQUENES
+---------
+CLIENTE_PK
+BRAYAN05072
+CLIENTE
+UNIQUE
+
+EDITORIAL_PK
+BRAYAN05072
+EDITORIAL
+UNIQUE
+
+ESTATUS_LIBRO_PK
+BRAYAN05072
+ESTATUS_LIBRO
+UNIQUE
+
+FACTURA_PK
+BRAYAN05072
+FACTURA
+UNIQUE
+
+H_ESTATUS_LIBRO_PK
+BRAYAN05072
+HISTORICO_ESTATUS_LIBRO
+UNIQUE
+
+LIBRO_PK
+BRAYAN05072
+LIBRO
+UNIQUE
+
+LIBRO_CLAVE_UK
+BRAYAN05072
+
+INDEX_NAME
+--------------------------------------------------------------------------------------
+TABLE_OWNER
+--------------------------------------------------------------------------------------
+TABLE_NAME
+--------------------------------------------------------------------------------------
+UNIQUENES
+---------
+LIBRO
+UNIQUE
+
+TEMATICA_PK
+BRAYAN05072
+TEMATICA
+UNIQUE
+
+
+8 rows selected.
+
+BRAYAN05072-SQL> alter index libro_clave_uk rename to uik_clv_libro;
+
+Index altered.
+
+BRAYAN05072-SQL> --E ^^ modificar nombre del indice
+BRAYAN05072-SQL> -- F. Eliminar data y estructura de la tabla libro, así como sus dependencias
+BRAYAN05072-SQL> drop table libro cascade constraints purge;
+
+Table dropped.
+
+BRAYAN05072-SQL> -- purge para eliminar de la papelera de reciclaje
+BRAYAN05072-SQL> -- G eliminar al usuario creado con todo
+BRAYAN05072-SQL> connect sys as sysdba
+Connected.
+SYS-SQL> drop user brayan05072 cascade;
+
+User dropped.
+
+SYS-SQL> spool off

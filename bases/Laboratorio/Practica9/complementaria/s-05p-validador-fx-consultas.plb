@@ -1,0 +1,206 @@
+define p_dir=/tmp/bd-unam/p09c 
+host mkdir -p /tmp/bd-unam/p09c
+host rm -f &&p_dir/&&p_archivo_respuestas
+host cp &&p_archivo_respuestas &&p_dir/&&p_archivo_respuestas
+host chmod 444 &&p_dir/&&p_archivo_respuestas
+connect sys/&&p_sys_password as sysdba
+create or replace directory bd_unam_tmp as '&&p_dir';
+grant read on directory bd_unam_tmp to &&p_usuario; 
+Prompt conectando como &p_usuario
+connect &p_usuario/&p_usuario_pass
+Prompt creando procedimientos para validar 
+@s-00-funciones-validacion.plb
+Prompt eliminando tablas antes de iniciar validación
+create or replace procedure spv_elimina_tablas wrapped 
+a000000
+367
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+7
+fc 107
+kwcizHeQwYv/QFDGdlfgW/ZNrBIwgwFK2ssVfC+iJscYecja0Y+XUt9w7q5d0A4DrFrzPmei
+L1zL0KTICWnNERcZ/988uNis6XXUv4pA+TyaBc4nloTaN7hppqVwkC1ConLy9MyCAtFY+h24
+FvcSVJABurqMylfkqJp9KakmFy6sjoA2FfCfNSNvxEZvbLkC/yl7XKMvkmTqq+tWwaVfejA2
+a44rrGzp4nLG5zo6y4V6BVWXs18O4m9ub6Gz11sh8IR4
+
+/
+show errors
+exec spv_elimina_tablas;
+Prompt cargando archivo de respuestas
+@&p_archivo_respuestas
+create or replace procedure spv_crea_tablas_respuesta wrapped 
+a000000
+367
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+7
+7cf 337
+QbETORSkHbLD2r/maw5F/zOSSnswg9dcLrfsZy/XMQ+zeKhr8qjUUyNlV5hrl9CJ4MXEJvPJ
+6uVwyoJwxbUi8MKKS5kT23HmzGbrcrk/ZCTkwlVTkS2a02kx9DnxguwDhEeOjXEBROqtHSCx
+Hc7yIPT4QtzB4p1Pljh//vrY/vRoQvYhBi6887+7tqUr1cKlUJ4QekQWTIt28rB2rMNNZv+I
+jd8EF4KmrsJ1A3xjzOdRWstxqzNQNveLzqvGK0QLiNdQ944+bnV0SlmrjJ9UCa8cUty9oPwR
+Vhgqt4LPwlXHeoQZKPeXAZJGLSBHghWKciOQkdowe5SukGz1TsNE0PPS7eOi3URtazl4ivEH
+JucMqqSmlL2rm8ryVEc971G/pAL+lAIvAThm47Sdvv0NPiU+hWMbrKiN421xZJ4ruZeOIqAa
+DgFpsKacdjCFFd//2sIU4ij5QKfrcH1OOIFquMgU1k8wrwh9X+ihIVzlIKzEM3hyB70QVUh4
+1bh4HlU/KXIpznYGcr3w1eYfDVTIH7R7o9ATRXX+6YdaPHzqoIekXVoW0cfPcPOghUAc6yXv
+cUCL2+BoZnBZA4x57gcLM9kW+JDEvNaC4YGEYmFgXoncRDvqPza7pnQXj19Z5AZ0W0CCI9pg
+M0y8+bwyIivynXGA3NkiJWGz2QGO24rbExN9lz9B5NChVXeEK0hopwJthOpP3OLQCygKZ1dr
+wwgHUS1FSXIxbaxPCRhU4oY/JB1Ms83FMOx2FAfUPYfWDOsXiqjTX/mPByvPYgnUFAxX+aQm
+0XbD9LeB4DOLH8pPZ7k=
+
+/
+show errors
+prompt Creando tablas consulta_r*
+exec spv_crea_tablas_respuesta
+Prompt cargando datos de validacion
+set define off
+create or replace procedure spv_carga_datos wrapped 
+a000000
+367
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+7
+12b1 611
+Ewa7X1PzR02AdEbMALwpPy3SZ0Qwg+2cecdRWi+pu8c/RE+nfpSegjQT8mw2F7b8L8dRvtA8
+NsmN8Kzaqbo6/rHjQUWUMTQR2MLoW8lFTylBHCO5WxCc9YAdZl1tQ1dRz+bGf2LCcaUVA/3A
+HkQXFxesj0SoiHRriDNExCxG76p9X1taV0ntEk9XVfm0HvL/c84ZiPE1UGTbGaMUAMZOYyDb
+7daIDnx2y5IPAlvGLPdpV4DxBGA0VsLDiaz3uwwG/hGXk/dLw77/DLyRck5WEOByzRYTbfFN
+TcLghVQ1YQ5UpNgyyNE/7VdsqKfb/ewim1YS4fjRQz6Q12cYUaOisczxgDHsKPbCrNUiXmdT
+jPtPEOAiXNO7fcBY6ZQZYq4biKry3RMG65Hrr7GIsLNfO4j3Ytb9N7MvUJcHe3t/jBv0KIly
+tE4bhdJSYIywPlOu7UGRf/CGLqn3vstL0XANjCmkRq50sISpMYltlIZf6PMFZ2ZW1SPtsciD
+zGlbZDODNW80ctNK4yglJO+WuKGPzhNbHSXNW1Und4uhfUSG0VLtQYa3uHh4w+k9gWE3gfDD
+xLL5V98dp3QFSwVATMSL5Tqi+OUaqxtgeeslsfFcxE+FDqGFUFkD8Mi89/wztoj1+lD1sgZL
+b0dc66D9XO40mdpVvXFyMTFeYAVgWioTySf4ijIZNst8QjZguaQZ6fqbdSKZ4Xa/Fc9swySR
+BfDe+Ce2uJIVOg+6L3zTEa0+TlHfODGAf/tbEX9iQu10hYEhusI674bVtovMWd06/pBJE1xU
+jxYcLrFKZYGMdaleih9t63urGKjkFl4rxuHVlyeUBx3iu/2oTLCY/ZF+Kqbf/5XxGBnaH2UP
+ELtxLiXS/v8CduoeileKfF5XqjoMhpL/HTH8ku1h+wo7UHkY/goqnVS3w5IgdpokGAKcChiX
+25CGRIB/LQ+Ow+UsboYwwcQoI82IBvGLoksijurp3uDE3ByTHtL3DSLTMQs6sH9hB3cFXP/q
+AQ7Etx6qU35+mt83ndg6Qx6vta6a4qVwrZ1OBs2jKB8G2iAZ2GFKI0HfYDY+Pd0ZVxTEjDUs
+n55CfdDu+zFi/+l+YY6UxHTZPOUePWGx/N8ZmYdjaGGj3wm67OAeDs+wsWYs6krNb2XuZIgr
+6bzNDYnQ1bE7p2up73TtZpoppNZoZboEfHmV4oW/Iyo6OM24/ZmS7RP797mQupa41LXx/S9b
+3NDdjfawbpS13CW9fUFvlVHv2USub5NxeXpYSUJY2Znck/8l5kEtTRZOM9CVXRhSo3EbKZwU
+vG4titlup3wzwNyT2wns1sIkdBHA2R6vVT6GvS5eYehy+7Wcg//ONg63QvHZocWqsAGJehV7
+ZRxsm9hxOzijRxfqrW2WjFbXMXLxbw7gnap2ohd7Fwg8vlLxtTZOjcdee5yGZfsldBavoc3p
+e76jwo52w6lk8SeDh/5XoppX1tYBbYmAuE1gVtxXRr/pKz2BWehlNiTyb6HMqq3814szEgAg
+MFJgrLmVD7X7kDQcjA==
+
+/
+show errors
+Promp cargando datos
+exec spv_carga_datos
+set define on
+create or replace procedure spv_valida_estructura_archivo_resp wrapped 
+a000000
+367
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+7
+332 25c
+ha1+ImE0SyZ0PI1rd6GfBH8gWlQwgwIJLvaGfI5oxz+VmJP7zPFWfmtrW8Y/eTZKkRQxLq7m
+MkT2hXuvn8D80A8x3GhG0bqk0gghgqveifLzOG6hRou4ZUmY1Zo7Ui66LG0zVLoLHga/QoMT
+gypbyia9AaDJvnzTXOxrJWusNAoCwH9E6BumvqEExi3yP9G5qlWunHP/tgwvZZDSt5jigpIq
+lTi3CATEvOqj4XLf1YmRNRdBrZPugoZP4SjQ6qtm6dysXH5lHEhfGRr7c5wMq4UOePfn95L7
+j2aDDcy5iDIgT3SAs+5lAC32xBvt0D/m0wgG10EtIRYK1D1iiVyYKH1u/4BF8se2xQIJtkFJ
+XWDXmtJSYBfSYTAb4TZT1uhN2YSZu8tFIUoibAXOPRPW4A8N4sAqdgrCS6puDzqG+I5twA++
+OazMKYbvFicXAFENINpbh4xS2uqgv7F1EWL6z9/tyWwBQ9icpCL6HeQsIjTU6oU6f7j9OOVY
+UxSlwmDLcXVXd2tC04jQNfglhbV0evJGRV2CTBXj3WLr2fYq7kQa/AGPupDzyoTopYr3xlXb
+KHNkk9xFFdCdJ8c8Tg==
+
+/
+show errors
+create or replace procedure spv_valida_respuestas wrapped 
+a000000
+367
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+7
+c79 3d9
+lYls0Z26JG4nZ5CyBDszSpCiUYIwg80rTCATfI5Vx6qVEO8mYRYxM453oTZolI2mgugsroUM
+aPA+N0dAesNzCJjovURFYU0T5d7F8hT1JEpk0LsAGxo3Lm5102kTecJDCvX6tj536I7lj55o
+faamqhe9A8lBjVTfbWIo/1YnT1TSc49qMBHfaBSevQ12Cv1pAs/0ve1Zdv7O//hSehkdtDWK
+A5cexk6Ia9b6zjszKgneuBwA8bq+2vqCmzGBNdZ2W47vTJqoH6no+hEhWKkfNqiSpuVT/C4k
+kFXc0N1LHSQYAMls1NfXy9Q0Hw8gnY01Ez7wbtTo9TTT1S0WcPeck39XdubslK1ZeJq3l+Hq
+ZQ/W+6vlk2hM812stH/vj//B21Jiz/Zi7pJWEcyBE6Mh+K6c4HdCqUMEXAHW4vOfBAeYFbq5
+y69VdzLsjfxCqfi2EUko7sHbTf4F1n8uom18IXVV9V/e/hnzXzeQL50tU4ITgKEvA3zJ7+RJ
+QR63Nwi5WNB/IU/b6OaNCqyWx0Tml3q2zsLu8WoYhjfJjbZfSP2BpjNXjuTVUVZEhdRmTbZL
+Q22J0JKJ/nhh3DRabVqEZSJzmUe28swLojPGWbZ6eL3PAiGMyg/HQm1TPMZTWk5+NvfdMrjw
+5sB64FTo6uZRqEPl6msk21FWxVRExXMr6GbVRhV/6gJWHyO9LfbsYxa4fXzD/tNBkqAoIpia
+G+t7Y4LUcg6wvaoSrji2SEZdDCIQBD9kdABv54H/sb4liit2Ks5ELe8gnhBNMFSgj0GJ9o0K
+GiiSAT3EshvslioSLjrSZiVLgO6T0wnD1xRXpASfAKZpmj+jTbJ+kT4yrg1drM7LEfQAtNUD
+LuaLOb8dEErrsvv/V/D5C/DtkORWmnj1+XWeNEqSHk0kaVkBX1gevorARg+8x21sPYGJR1b4
+iczZG5YOH1d3yTsEIxWBwWFCDtcgP/shoemc
+
+/
+show errors
+set appinfo on
+exec spv_print_header
+host sha256sum &&p_archivo_validador
+exec spv_valida_estructura_archivo_resp('&&p_archivo_respuestas');
+exec spv_print_ok('Estructura del archivo de respuestas correcto');
+exec spv_valida_respuestas
+host rm -f &&p_dir/&&p_archivo_respuestas

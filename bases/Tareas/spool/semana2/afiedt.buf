@@ -1,0 +1,6 @@
+create table nomina_set_null(
+nomina_id number(10,0) constraint nomina_set_null_pk primary key,
+quincena_id constraint nomina_set_null_quincena_id_fk references quincena(quincena_id)
+on delete set null
+)
+/

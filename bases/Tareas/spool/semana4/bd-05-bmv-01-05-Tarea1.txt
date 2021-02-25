@@ -1,0 +1,73 @@
+BRAYAN0508-SQL> select * from pelicula;
+
+    DVD_ID SINOPSIS
+---------- ----------------------------------------
+         1 Una pelicula con una trama interesante
+
+BRAYAN0508-SQL> select * from dvd;
+
+    DVD_ID TITULO                                       PRECIO T
+---------- ---------------------------------------- ---------- -
+FECHA_RECEPCION    FECHA_REGISTRO
+------------------ ------------------
+         1 Infinity                                      89.34 P
+10-OCT-16          05-JAN-21
+
+
+BRAYAN0508-SQL> desc musica;
+ERROR:
+ORA-04043: object musica does not exist
+
+
+BRAYAN0508-SQL> desc music;
+ERROR:
+ORA-04043: object music does not exist
+
+
+BRAYAN0508-SQL> desc musical;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DVD_ID                                    NOT NULL NUMBER(10)
+ ARTISTA                                   NOT NULL VARCHAR2(40)
+
+BRAYAN0508-SQL> delete from pelicula where dvd_id=(select dvd_id from dvd where titulo='Infinity');
+
+1 row deleted.
+
+BRAYAN0508-SQL> update dvd set titulo='Infinity Piano' where titulo='Infinity';
+
+1 row updated.
+
+BRAYAN0508-SQL> insert into musical values(
+  2  (select dvd_id from dvd where titulo='Infinity Piano'),'Yiruma');
+
+1 row created.
+
+BRAYAN0508-SQL> select * form musical;
+select * form musical
+         *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+BRAYAN0508-SQL> select * from musical;
+
+    DVD_ID ARTISTA
+---------- ----------------------------------------
+         1 Yiruma
+
+BRAYAN0508-SQL> select * from dvd;
+
+    DVD_ID TITULO                                       PRECIO T
+---------- ---------------------------------------- ---------- -
+FECHA_RECEPCION    FECHA_REGISTRO
+------------------ ------------------
+         1 Infinity Piano                                89.34 P
+10-OCT-16          05-JAN-21
+
+
+BRAYAN0508-SQL> commit;
+
+Commit complete.
+
+BRAYAN0508-SQL> spool off

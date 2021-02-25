@@ -1,0 +1,35 @@
+BRAYAN0507-SQL> create private temporary table ora$ptt_empleado_temp2(
+  2  empleado_id number(10,0) ,
+  3  nombre varchar2(40)
+  4  ) on commit preserve definition;
+
+Table created.
+
+BRAYAN0507-SQL> insert into ora$ptt_empleado_temp2 values(1,'brayan alexis');
+
+1 row created.
+
+BRAYAN0507-SQL> select * from ora$ptt_empleado_temp2;
+
+EMPLEADO_ID NOMBRE
+----------- ----------------------------------------
+          1 brayan alexis
+
+BRAYAN0507-SQL> commit;
+
+Commit complete.
+
+BRAYAN0507-SQL> select * from ora$ptt_empleado_temp2;
+
+EMPLEADO_ID NOMBRE
+----------- ----------------------------------------
+          1 brayan alexis
+
+BRAYAN0507-SQL> desc ora$ptt_empleado_temp2;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPLEADO_ID                                        NUMBER(10)
+ NOMBRE                                             VARCHAR2(40)
+
+BRAYAN0507-SQL> -- Vemos que con ON COMMIT PRESERVE DEFINITION se conserva la tabla y su contenido despues del commit, por lo que a pesar de hacer commit, permanece en memoria
+BRAYAN0507-SQL> spool off
